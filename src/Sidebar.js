@@ -52,8 +52,8 @@ function Sidebar() {
       </div>
 
       <div className="sidebar__chats">
-        {chats.map(({ id, data: { chatName } }) => (
-          <SidebarChat key={id} id={id} chatName={chatName} />
+        {chats.map(({ id, name, timestamp }) => (
+          <SidebarChat key={id} id={id} chatName={name} timestamp={timestamp} />
         ))}
       </div>
     </div>

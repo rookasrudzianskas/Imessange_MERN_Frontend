@@ -25,13 +25,25 @@ function Sidebar() {
 
   const addChat = () => {
     const chatName = prompt("Please enter a chat name");
+    const firstMsg = prompt("Please send a welcome message");
 
-    if (chatName) {
-      db.collection("chats").add({
-        chatName: chatName,
-      });
-    }
+        if(chatName && firstMsg) {
+            let chatId = '';
+
+            axios.post('/new/conversation', {
+                chatName: chatName
+            }).then((res) => {
+                chatId = res.data._id
+            }).then(() => {
+                axios.post(`/new/message?id=${chatId}`, {
+                    message: firstMsg,
+                    timestamp: Date.now(),
+                    user: user,
+                })
+            })
+        }
   };
+
 
   return (
     <div className="sidebar">

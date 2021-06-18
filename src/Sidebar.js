@@ -12,6 +12,12 @@ function Sidebar() {
   const user = useSelector(selectUser);
   const [chats, setChats] = useState([]);
 
+  const getChats = () => {
+      axios.get('/get/conversationList').then((res) => {
+          setChats(res.data);
+      })
+  }
+
   useEffect(() => {
     db.collection("chats").onSnapshot((snapshot) =>
       setChats(

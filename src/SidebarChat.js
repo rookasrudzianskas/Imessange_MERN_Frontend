@@ -11,9 +11,9 @@ import axios from "./axios";
 function SidebarChat({ id, chatName }) {
   const dispatch = useDispatch();
   const [chatInfo, setChatInfo] = useState([]);
-  const [lastMsg, setLastMsg] = useState([]);
-  const [lastPhoto, setLastPhoto] = useState([]);
-  const [lastTimestamp, setLastTimestamp] = useState([]);
+  const [lastMsg, setLastMsg] = useState("");
+  const [lastPhoto, setLastPhoto] = useState("");
+  const [lastTimestamp, setLastTimestamp] = useState("");
 
 
   // here we get the messages to display here

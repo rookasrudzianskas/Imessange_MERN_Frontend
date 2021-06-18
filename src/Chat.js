@@ -9,6 +9,7 @@ import Message from "./Message";
 import firebase from "firebase";
 import { selectUser } from "./features/userSlice";
 import FlipMove from "react-flip-move";
+import axios from "./axios";
 
 function Chat() {
   const user = useSelector(selectUser);
@@ -19,18 +20,11 @@ function Chat() {
 
   useEffect(() => {
     if (chatId) {
-      db.collection("chats")
-        .doc(chatId)
-        .collection("messages")
-        .orderBy("timestamp", "desc")
-        .onSnapshot((snapshot) =>
-          setMessages(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              data: doc.data(),
-            }))
-          )
-        );
+
+      // this gets the messsages in the chat id
+      axios.get(`/get/conversation?id=${chatId}`).then((res) => {
+        setMessages(res.data[0].conversation);
+      })
     }
   }, [chatId]);
 

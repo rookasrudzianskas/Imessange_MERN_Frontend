@@ -6,19 +6,29 @@ import { setChat } from "./features/chatSlice";
 import db from "./firebase";
 import "./SidebarChat.css";
 import * as timeago from "timeago.js";
+import axios from "./axios";
 
 function SidebarChat({ id, chatName }) {
   const dispatch = useDispatch();
   const [chatInfo, setChatInfo] = useState([]);
+  const [lastMsg, setLastMsg] = useState([]);
+  const [lastPhoto, setLastPhoto] = useState([]);
+  const [lastTimestamp, setLastTimestamp] = useState([]);
+
+
+  // here we get the messages to display here
+  const getSidebarElement = () => {
+      axios.get(`/get/lastMessage?id=${id}`).then((res) => {
+          setLastMsg(res.data.message);
+          setLastPhoto(res.data.user.photo);
+          setLastTimestamp(res.data.timestamp);
+      });
+  }
 
   useEffect(() => {
-    db.collection("chats")
-      .doc(id)
-      .collection("messages")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) =>
-        setChatInfo(snapshot.docs.map((doc) => doc.data()))
-      );
+      getSidebarElement();
+
+      // real times stuff
   }, [id]);
 
   return (

@@ -18,27 +18,26 @@ function Chat() {
   const chatId = useSelector(selectChatId);
   const [messages, setMessages] = useState([]);
 
-  useEffect(() => {
+  const getConversation = (chatId) => {
     if (chatId) {
-
       // this gets the messsages in the chat id
       axios.get(`/get/conversation?id=${chatId}`).then((res) => {
         setMessages(res.data[0].conversation);
       })
     }
+  }
+
+  useEffect(() => {
+    getConversation(chatId);
   }, [chatId]);
 
   const sendMessage = (e) => {
     e.preventDefault();
-
-    db.collection("chats").doc(chatId).collection("messages").add({
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    axios.post(`/new/message?id=${chatId}`, {
       message: input,
-      uid: user.uid,
-      photo: user.photo,
-      email: user.email,
-      displayName: user.displayName,
-    });
+      timestamp: Date.now(),
+      user: user,
+    })
 
     setInput("");
   };

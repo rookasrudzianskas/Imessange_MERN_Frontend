@@ -7,6 +7,7 @@ import SidebarChat from "./SidebarChat";
 import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import db, { auth } from "./firebase";
+import axios from "./axios";
 
 function Sidebar() {
   const user = useSelector(selectUser);
@@ -19,14 +20,7 @@ function Sidebar() {
   }
 
   useEffect(() => {
-    db.collection("chats").onSnapshot((snapshot) =>
-      setChats(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          data: doc.data(),
-        }))
-      )
-    );
+      getChats();
   }, []);
 
   const addChat = () => {

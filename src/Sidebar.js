@@ -25,6 +25,7 @@ function Sidebar() {
 
   const addChat = () => {
     const chatName = prompt("Please enter a chat name");
+    // otherwise it will make the whole build super complicated
     const firstMsg = prompt("Please send a welcome message");
 
         if(chatName && firstMsg) {
@@ -33,8 +34,10 @@ function Sidebar() {
             axios.post('/new/conversation', {
                 chatName: chatName
             }).then((res) => {
+                // storing the id
                 chatId = res.data._id
             }).then(() => {
+                // adding the message to the exact chat ID
                 axios.post(`/new/message?id=${chatId}`, {
                     message: firstMsg,
                     timestamp: Date.now(),

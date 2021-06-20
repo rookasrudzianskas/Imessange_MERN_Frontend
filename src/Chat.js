@@ -34,6 +34,7 @@ function Chat() {
   const sendMessage = (e) => {
     e.preventDefault();
     // prevents default
+    // prevents default
     axios.post(`/new/message?id=${chatId}`, {
       message: input,
       timestamp: Date.now(),

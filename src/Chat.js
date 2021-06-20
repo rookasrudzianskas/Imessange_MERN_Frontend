@@ -33,6 +33,7 @@ function Chat() {
 
   const sendMessage = (e) => {
     e.preventDefault();
+    // prevents
     axios.post(`/new/message?id=${chatId}`, {
       message: input,
       timestamp: Date.now(),

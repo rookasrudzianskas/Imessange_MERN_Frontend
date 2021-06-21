@@ -56,8 +56,8 @@ function Chat() {
       {/* chat messages */}
       <div className="chat__messages">
         <FlipMove>
-          {messages.map(({ id, data }) => (
-            <Message key={id} contents={data} />
+          {messages.map(({ user, _id, message, timestamp}) => (
+              <Message key={_id} id={_id} sender={user} message={message} timestamp={timestamp} />
           ))}
         </FlipMove>
       </div>

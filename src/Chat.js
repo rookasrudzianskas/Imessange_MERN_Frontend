@@ -23,6 +23,7 @@ function Chat() {
       // this gets the messsages in the chat id
       axios.get(`/get/conversation?id=${chatId}`).then((res) => {
         setMessages(res.data[0].conversation);
+        // gets the messages
       })
     }
   }

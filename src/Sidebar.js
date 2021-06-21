@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { selectUser } from "./features/userSlice";
 import db, { auth } from "./firebase";
 import axios from "./axios";
+import Pusher from "pusher-js";
 
 function Sidebar() {
   const user = useSelector(selectUser);
@@ -20,6 +21,8 @@ function Sidebar() {
   }
 
   useEffect(() => {
+      Pusher.unsubscribe('messages');
+
       getChats();
   }, []);
 

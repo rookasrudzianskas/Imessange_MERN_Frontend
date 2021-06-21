@@ -33,12 +33,12 @@ function SidebarChat({ id, chatName }) {
   useEffect(() => {
       getSidebarElement();
 
+      // real times stuff
       const channel = pusher.subscribe('messages');
       channel.bind('newMessage', function(data) {
           getSidebarElement();
       })
 
-      // real times stuff
   }, [id]);
 
   return (

@@ -16,7 +16,7 @@ const Message = forwardRef(
         ref={ref}
         className={`message ${user.email === sender.email && "message__sender"}`}
       >
-        <Avatar className="message__photo" src={photo} />
+        <Avatar className="message__photo" src={sender.photo} />
         <p>{message}</p>
         <small>{new Date(parseInt(timestamp)).toDateString()}</small>
       </div>

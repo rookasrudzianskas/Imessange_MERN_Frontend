@@ -10,6 +10,10 @@ import db, { auth } from "./firebase";
 import axios from "./axios";
 import Pusher from "pusher-js";
 
+const pusher = new Pusher('117ff3ca7fcf393a58b3', {
+    cluster: 'eu'
+});
+
 function Sidebar() {
   const user = useSelector(selectUser);
   const [chats, setChats] = useState([]);

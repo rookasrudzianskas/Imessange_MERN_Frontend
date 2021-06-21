@@ -12,6 +12,10 @@ import FlipMove from "react-flip-move";
 import axios from "./axios";
 import Pusher from "pusher-js";
 
+const pusher = new Pusher('117ff3ca7fcf393a58b3', {
+  cluster: 'eu'
+});
+
 function Chat() {
   const user = useSelector(selectUser);
   const [input, setInput] = useState("");

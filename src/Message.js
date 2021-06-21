@@ -6,7 +6,7 @@ import "./Message.css";
 
 const Message = forwardRef(
   (
-    { id, contents: { timestamp, displayName, email, message, photo, uid } },
+    { id, sender, message, timestamp },
     ref
   ) => {
     const user = useSelector(selectUser);
@@ -14,11 +14,11 @@ const Message = forwardRef(
     return (
       <div
         ref={ref}
-        className={`message ${user.email === email && "message__sender"}`}
+        className={`message ${user.email === sender.email && "message__sender"}`}
       >
         <Avatar className="message__photo" src={photo} />
         <p>{message}</p>
-        <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
+        <small>{new Date(parseInt(timestamp)).toDateString()}</small>
       </div>
     );
   }

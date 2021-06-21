@@ -7,6 +7,11 @@ import db from "./firebase";
 import "./SidebarChat.css";
 import * as timeago from "timeago.js";
 import axios from "./axios";
+import Pusher from "pusher-js";
+
+const pusher = new Pusher('117ff3ca7fcf393a58b3', {
+    cluster: 'eu'
+});
 
 function SidebarChat({ id, chatName }) {
   const dispatch = useDispatch();
@@ -27,6 +32,11 @@ function SidebarChat({ id, chatName }) {
 
   useEffect(() => {
       getSidebarElement();
+
+      const channel = pusher.subscribe('messages');
+      channel.bind('newMessage', function(data) {
+          getSidebarElement();
+      })
 
       // real times stuff
   }, [id]);

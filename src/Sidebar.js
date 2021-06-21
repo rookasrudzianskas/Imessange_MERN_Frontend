@@ -21,9 +21,13 @@ function Sidebar() {
   }
 
   useEffect(() => {
-      Pusher.unsubscribe('messages');
 
       getChats();
+
+      const channel = pusher.subscribe('chats');
+      channel.bind('newChat', function(data) {
+          getChats();
+      });
   }, []);
 
   const addChat = () => {

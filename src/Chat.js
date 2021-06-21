@@ -10,6 +10,7 @@ import firebase from "firebase";
 import { selectUser } from "./features/userSlice";
 import FlipMove from "react-flip-move";
 import axios from "./axios";
+import Pusher from "pusher-js";
 
 function Chat() {
   const user = useSelector(selectUser);
@@ -29,7 +30,15 @@ function Chat() {
   }
 
   useEffect(() => {
+
+    pusher.unsubscribe('messages');
+
     getConversation(chatId);
+
+    const channel = pusher.subscribe('messages');
+    channel.bind('newMessage', function (data) {
+      getConversation(chatId);
+    });
   }, [chatId]);
 
   const sendMessage = (e) => {

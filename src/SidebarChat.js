@@ -43,10 +43,10 @@ function SidebarChat({ id, chatName }) {
       }
       className="sidebarChat"
     >
-      <Avatar src={chatInfo[0]?.photo} />
+      <Avatar src={lastPhoto} />
       <div className="sidebarChat__info">
         <h3>{chatName}</h3>
-        <p>{chatInfo[0]?.message}</p>
+        <p>{lastMsg}</p>
         <small>
             {new Date(parseInt(lastTimestamp)).toUTCString()}
         </small>
